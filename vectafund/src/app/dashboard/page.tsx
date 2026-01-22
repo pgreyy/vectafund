@@ -292,6 +292,13 @@ export default function DashboardPage() {
                       </div>
                     </div>
                     <div className="p-2">
+                      <Link
+                        href="/settings"
+                        className="w-full flex items-center gap-3 px-3 py-2 text-sm text-vf-muted hover:text-vf-text hover:bg-vf-dark rounded-lg transition-colors"
+                      >
+                        <Settings className="w-4 h-4" />
+                        Notification Settings
+                      </Link>
                       <button
                         onClick={handleSignOut}
                         className="w-full flex items-center gap-3 px-3 py-2 text-sm text-vf-muted hover:text-vf-text hover:bg-vf-dark rounded-lg transition-colors"
@@ -413,12 +420,15 @@ export default function DashboardPage() {
                                 src={projectLogos[fundraise.project_name]} 
                                 alt={fundraise.project_name}
                                 className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = 'none';
+                                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                }}
                               />
-                            ) : (
-                              <span className="font-display font-bold text-vf-accent text-lg">
-                                {fundraise.project_name[0]}
-                              </span>
-                            )}
+                            ) : null}
+                            <span className={`font-display font-bold text-vf-accent text-lg ${projectLogos[fundraise.project_name] ? 'hidden' : ''}`}>
+                              {fundraise.project_name[0]}
+                            </span>
                           </div>
                           <div>
                             <div className="flex items-center gap-3 flex-wrap">
