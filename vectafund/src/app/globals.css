@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #0A0A0B;
+  color: #FAFAFA;
+  font-family: var(--font-body);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111113;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46;
+}
+
+/* Selection */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #FAFAFA;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(24, 24, 27, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Glow effects */
+.glow-accent {
+  box-shadow: 0 0 60px rgba(16, 185, 129, 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), transparent, rgba(139, 92, 246, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Ethos score badge */
+.ethos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.ethos-badge.high {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.ethos-badge.medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.ethos-badge.low {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.ethos-badge.none {
+  background: rgba(113, 113, 122, 0.15);
+  color: #71717A;
+  border: 1px solid rgba(113, 113, 122, 0.3);
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 bg-vf-accent text-vf-black font-semibold rounded-lg transition-all duration-200;
+  @apply hover:bg-vf-accent-dim hover:shadow-lg hover:shadow-vf-accent/20;
+  @apply active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-transparent text-vf-text font-semibold rounded-lg transition-all duration-200;
+  @apply border border-vf-border hover:border-vf-accent hover:text-vf-accent;
+  @apply active:scale-[0.98];
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply transition-all duration-300;
+  @apply hover:border-vf-accent/30 hover:shadow-lg hover:shadow-vf-accent/5;
+  @apply hover:-translate-y-0.5;
+}
+
+/* Input styles */
+.input-field {
+  @apply w-full px-4 py-3 bg-vf-dark border border-vf-border rounded-lg;
+  @apply text-vf-text placeholder:text-vf-muted;
+  @apply focus:outline-none focus:border-vf-accent focus:ring-1 focus:ring-vf-accent/50;
+  @apply transition-all duration-200;
+}
+
+/* Table styles */
+.data-table {
+  @apply w-full;
+}
+
+.data-table th {
+  @apply text-left text-xs font-medium text-vf-muted uppercase tracking-wider py-3 px-4;
+  @apply border-b border-vf-border;
+}
+
+.data-table td {
+  @apply py-4 px-4 border-b border-vf-border/50;
+}
+
+.data-table tr:hover td {
+  @apply bg-vf-card/50;
+}
